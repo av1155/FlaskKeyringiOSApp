@@ -1,19 +1,20 @@
-//
-//  ViewController.swift
-//  FlaskKeyringiOSApp
-//
-//  Created by Andrea Venti on 1/7/24.
-//
-
 import UIKit
+import WebKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WKUIDelegate {
+    var webView: WKWebView!
+
+    override func loadView() {
+        let webConfiguration = WKWebViewConfiguration()
+        webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.uiDelegate = self
+        view = webView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        let myURL = URL(string: "https://flaskkeyring.tech")
+        let myRequest = URLRequest(url: myURL!)
+        webView.load(myRequest)
     }
-
-
 }
-
